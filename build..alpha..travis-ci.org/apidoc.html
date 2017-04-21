@@ -1,0 +1,246 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/klei/grunt-injector"
+
+    >grunt-injector (v1.1.0)</a>
+</h1>
+<h4>Inject references to files into other files (think scripts and stylesheets into an html file)</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.grunt-injector">module grunt-injector</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.grunt-injector.grunt-injector">
+            function <span class="apidocSignatureSpan"></span>grunt-injector
+            <span class="apidocSignatureSpan">(grunt)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.grunt-injector" id="apidoc.module.grunt-injector">module grunt-injector</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.grunt-injector.grunt-injector" id="apidoc.element.grunt-injector.grunt-injector">
+        function <span class="apidocSignatureSpan"></span>grunt-injector
+        <span class="apidocSignatureSpan">(grunt)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">grunt-injector = function (grunt) {
+
+  // Project configuration.
+  grunt.initConfig({
+    jshint: {
+      all: [
+        &#x27;Gruntfile.js&#x27;,
+        &#x27;tasks/*.js&#x27;,
+        &#x27;&#x3c;%= nodeunit.tests %&#x3e;&#x27;,
+      ],
+      options: {
+        jshintrc: &#x27;.jshintrc&#x27;,
+      },
+    },
+
+    // Before generating any new files, remove any previously-created files.
+    clean: {
+      tests: [&#x27;tmp&#x27;],
+    },
+
+    // Configuration to be run (and then tested).
+    injector: {
+      options: {
+        template: &#x27;test/fixtures/index.html&#x27;
+      },
+      defaults: {
+        files: {
+          &#x27;tmp/defaults.html&#x27;: [&#x27;test/fixtures/*.js&#x27;, &#x27;test/fixtures/*.css&#x27;, &#x27;test/fixtures/component.html&#x27;, &#x27;!test/fixtures/*.min
+.*&#x27;]
+        }
+      },
+      prefix: {
+        options: {
+          prefix: &#x27;abc&#x27;
+        },
+        files: {
+          &#x27;tmp/prefix.html&#x27;: [&#x27;test/fixtures/*.js&#x27;, &#x27;test/fixtures/*.css&#x27;, &#x27;test/fixtures/component.html&#x27;, &#x27;!test/fixtures/*.min
+.*&#x27;]
+        }
+      },
+      postfix: {
+        options: {
+          postfix: &#x27;?offset1234567&#x27;
+        },
+        files: {
+          &#x27;tmp/postfix.html&#x27;: [&#x27;test/fixtures/*.js&#x27;, &#x27;test/fixtures/*.css&#x27;, &#x27;test/fixtures/component.html&#x27;, &#x27;!test/fixtures/*.min
+.*&#x27;]
+        }
+      },
+      templateString: {
+        options: {
+          template: null,
+          templateString: &#x27;{\n  &#x22;js&#x22;: []\n}&#x27;,
+          starttag: &#x27;&#x22;{{ext}}&#x22;: [&#x27;,
+          endtag: &#x27;]&#x27;,
+          transform: function (file, i, length) {
+            return &#x27;  &#x22;&#x27; + file + &#x27;&#x22;&#x27; + (i + 1 &#x3c; length ? &#x27;,&#x27; : &#x27;&#x27;);
+          }
+        },
+        files: {
+          &#x27;tmp/templateString.json&#x27;: [&#x27;test/fixtures/*.js&#x27;, &#x27;test/fixtures/*.css&#x27;, &#x27;test/fixtures/component.html&#x27;, &#x27;!test/fixtures
+/*.min.*&#x27;]
+        }
+      },
+      ignorePath: {
+        options: {
+          ignorePath: [&#x27;test/fixtures&#x27;]
+        },
+        files: {
+          &#x27;tmp/ignorePath.html&#x27;: [&#x27;test/fixtures/*.js&#x27;, &#x27;test/fixtures/*.css&#x27;, &#x27;test/fixtures/component.html&#x27;, &#x27;!test/fixtures/*.
+min.*&#x27;],
+        }
+      },
+      noAddRootSlash: {
+        options: {
+          addRootSlash: false
+        },
+        files: {
+          &#x27;tmp/noAddRootSlash.html&#x27;: [&#x27;test/fixtures/*.js&#x27;, &#x27;test/fixtures/*.css&#x27;, &#x27;test/fixtures/component.html&#x27;, &#x27;!test/fixtures
+/*.min.*&#x27;]
+        }
+      },
+      noAddRootSlashWithIgnorePath: {
+        options: {
+          addRootSlash: false,
+          ignorePath: &#x27;test&#x27;
+        },
+        files: {
+          &#x27;tmp/noAddRootSlashWithIgnorePath.html&#x27;: [&#x27;test/fixtures/*.js&#x27;, &#x27;test/fixtures/*.css&#x27;, &#x27;test/fixtures/component.html&#x27;, &#x27;!
+test/fixtures/*.min.*&#x27;]
+        }
+      },
+      relativePaths: {
+        options: {
+          relative: true
+        },
+        files: {
+          &#x27;tmp/relativePaths.html&#x27;: [
+            &#x27;test/fixtures/*.js&#x27;,
+            &#x27;test/fixtures/*.css&#x27;,
+            &#x27;test/fixtures/component.html&#x27;,
+            &#x27;!test/fixtures/*.min.*&#x27;
+          ]
+        }
+      },
+      relativePathsAndExpand: {
+        options: {
+          relative: true,
+          destFile: &#x27;tmp/relativeExpanded.html&#x27;
+        },
+        files: [{
+          expand: true,
+          cwd: &#x27;test/fixtures&#x27;,
+          src: [&#x27;*.js&#x27;, &#x27;*.css&#x27;, &#x27;component.html&#x27;, &#x27;!*.min.*&#x27;]
+        }]
+      },
+      expandFiles: {
+        options: {
+          ignorePath: &#x27;test/fixtures&#x27;,
+          destFile: &#x27;tmp/expanded.html&#x27;
+        },
+        files: [{
+          expand: true,
+          cwd: &#x27;test/fixtures&#x27;,
+          src: [&#x27;*.js&#x27;, &#x27;*.css&#x27;, &#x27;component.html&#x27;, &#x27;!*.min.*&#x27;]
+        }]
+      },
+      minFiles: {
+        options: {
+          ignorePath: &#x27;test/fixtures&#x27;,
+          destFile: &#x27;tmp/min.html&#x27;,
+          min: true
+        },
+        files: [{
+          expand: true,
+          cwd: &#x27;test/fixtures&#x27;,
+          src: [&#x27;*.js&#x27;, &#x27;*.css&#x27;, &#x27;component.html&#x27;, &#x27;!*.min.*&#x27;]
+        }]
+      },
+      bowerFiles: {
+        files: {
+          &#x27;tmp/bower.html&#x27;: [&#x27;test/fixtures/bower.json&#x27;]
+        }
+      },
+      bowerInOtherDir: {
+        files: {
+          &#x27;tmp/bowerInOtherDir.html&#x27;: [&#x27;test/fixtures/bower_fake/bower.json&#x27;] ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
